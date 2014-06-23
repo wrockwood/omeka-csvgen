@@ -4,7 +4,7 @@
 $csvfile = 'import.csv';
 
 // base path (works best if you copy the script to the root
-// of the directory you want to index, and set this to '.'.
+// of the directory you want to index, and set this to '.'.)
 $startpath = '.';
 
 // define the array and fields
