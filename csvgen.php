@@ -19,7 +19,6 @@ $dctitle = ''; // folderpath/date-based
 $dcsubject = 'American newspapers--Michigan.';
 $dcsubject2 = 'Kalkaska County (Mich.)';
 $dcsubject3 = 'Kalkaska (Mich.)';
-$dcdescription = 'Issue of "The Leader and the Kalkaskian Newspaper".';
 $dccreator = 'Contributors to the newspaper.';
 $dcdate = ''; // this ends up being a rewritten form of the filename
 $dccontributor = 'Kalkaska County Library, Kalkaska (Mich.)';
@@ -54,6 +53,7 @@ if ($folderpath = opendir($startpath)) {
                                                 $fileyear = $datearray[2];
                                                 $filemonth = $datearray[0];
                                                 $fileday = $datearray[1];
+                                                $dcdescription = 'Issue of "' . $collection . '" Newspaper.';
                                                 $csvarray[] = array($collection . ", " . $datemap[$filemonth] ." ". $fileday .", ". $fileyear, $dcsubject, $dcsubject2, $dcsubject3, $dcdescription, $dccreator, $fileyear ."-". $filemonth ."-". $fileday, $dccontributor, $dcrights, $dcrelation, $dcformat, $dclanguage, $dctype, $file, $dccoverage, $dctext, $dcoriginalformat, $url . rawurlencode($folder) ."/". rawurlencode($year) ."/". rawurlencode($month) ."/". $file);
                                             }
                                         }
