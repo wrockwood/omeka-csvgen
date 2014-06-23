@@ -15,7 +15,7 @@ $csvarray[] = array('Dublin Core:Title','Dublin Core:Subject','Dublin Core:Subje
 $datemap = array("01"=>"January","02"=>"February","03"=>"March","04"=>"April","05"=>"May","06"=>"June","07"=>"July","08"=>"August","09"=>"September","10"=>"October","11"=>"November","12"=>"December");
 
 // default vaules for each field
-$dctitle = 'The Leader and the Kalkaskian, '; // plus Month Day, Year.
+$dctitle = ''; // folderpath/date-based
 $dcsubject = 'American newspapers--Michigan.';
 $dcsubject2 = 'Kalkaska County (Mich.)';
 $dcsubject3 = 'Kalkaska (Mich.)';
@@ -47,12 +47,14 @@ if ($folderpath = opendir($startpath)) {
                                     if ($filepath = opendir($folder . '/' . $year . '/' . $month)) {
                                         while (($file = readdir($filepath)) !== false) {
                                             if (is_file($folder . '/' . $year . '/' . $month . '/' . $file)) {
+                                                $fname = preg_split("/[0-9] /", $folder);
+                                                $collection = $fname[1];
                                                 $baredate = str_replace('.pdf', '', $file);
                                                 $datearray = explode("-", $baredate);
                                                 $fileyear = $datearray[2];
                                                 $filemonth = $datearray[0];
                                                 $fileday = $datearray[1];
-                                                $csvarray[] = array($dctitle . $datemap[$filemonth] ." ". $fileday .", ". $fileyear, $dcsubject, $dcsubject2, $dcsubject3, $dcdescription, $dccreator, $fileyear ."-". $filemonth ."-". $fileday, $dccontributor, $dcrights, $dcrelation, $dcformat, $dclanguage, $dctype, $file, $dccoverage, $dctext, $dcoriginalformat, $url . rawurlencode($folder) ."/". rawurlencode($year) ."/". rawurlencode($month) ."/". $file);
+                                                $csvarray[] = array($collection . ", " . $datemap[$filemonth] ." ". $fileday .", ". $fileyear, $dcsubject, $dcsubject2, $dcsubject3, $dcdescription, $dccreator, $fileyear ."-". $filemonth ."-". $fileday, $dccontributor, $dcrights, $dcrelation, $dcformat, $dclanguage, $dctype, $file, $dccoverage, $dctext, $dcoriginalformat, $url . rawurlencode($folder) ."/". rawurlencode($year) ."/". rawurlencode($month) ."/". $file);
                                             }
                                         }
                                         closedir($filepath);
