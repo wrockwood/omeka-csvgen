@@ -9,7 +9,7 @@ $startpath = '.';
 
 // define the array and fields
 $csvarray = array();
-$csvarray[] = array('Dublin Core:Title','Dublin Core:Subject','Dublin Core:Subject2','Dublin Core:Subject3','Dublin Core:Description','Dublin Core:Creator','Dublin Core:Date','Dublin Core:Contributor','Dublin Core:Rights','Dublin Core:Relation','Dublin Core:Format','Dublin Core:Language','Dublin Core:Type','Dublin Core:Identifier','Dublin Core:Coverage','Dublin Core:Text','Dublin Core:Original Format','File URL');
+$csvarray[] = array('Dublin Core:Title','Dublin Core:Subject','Dublin Core:Subject2','Dublin Core:Subject3','Dublin Core:Description','Dublin Core:Creator','Dublin Core:Source','Dublin Core:Publisher','Dublin Core:Date','Dublin Core:Contributor','Dublin Core:Rights','Dublin Core:Relation','Dublin Core:Format','Dublin Core:Language','Dublin Core:Type','Dublin Core:Identifier','Dublin Core:Coverage','Dublin Core:Text','Dublin Core:Original Format','File URL');
 
 // this could have been better.
 $datemap = array("01"=>"January","02"=>"February","03"=>"March","04"=>"April","05"=>"May","06"=>"June","07"=>"July","08"=>"August","09"=>"September","10"=>"October","11"=>"November","12"=>"December");
@@ -20,19 +20,21 @@ $dcsubject = 'American newspapers--Michigan.';
 $dcsubject2 = 'Kalkaska County (Mich.)';
 $dcsubject3 = 'Kalkaska (Mich.)';
 $dccreator = 'Contributors to the newspaper.';
+$dcsource = 'Microfilmed reproduction of this newspaper issue is held at the Kalkaska County Library, Kalkaska (Mich.).';
+$dcpublisher = 'Kalkaska County Library, Kalkaska (Mich.)';
 $dcdate = ''; // this ends up being a rewritten form of the filename
 $dccontributor = 'Kalkaska County Library, Kalkaska (Mich.)';
 $dcrights = 'Excluding issues now in the public domain (1879-1924), Morning Star Publishing Company retains the copyright on the content of this newspaper. Depending on agreements made with writers and photographers, the creators of the content may still retain copyright. Please do not republish without permission.';
-$dcrelation = 'Microfilmed reproduction of this newspaper issue is held at the Kalkaska County Library, Kalkaska (Mich.).';
+$dcrelation = 'None';
 $dcformat = 'PDF';
 $dclanguage = 'English';
 $dctype = 'Document';
 $dcidentifier = ''; // this ends up being the filename
 $dccoverage = 'Kalkaska County, Michigan';
-$dctext = 'OCR Text pulled using pdf extractor plugin, compatible with omeka 2.1.';
+$dctext = 'OCR Text extracted using PDF Text plugin, compatible with omeka 2.2.';
 $dcoriginalformat = 'Newsprint';
 // base url
-$url = 'http://minecraft.tadl.org/kcl/';
+$url = 'http://repository.tadl.org/kcl/';
 
 if ($folderpath = opendir($startpath)) {
     while (($folder = readdir($folderpath)) !== false) {
@@ -54,7 +56,7 @@ if ($folderpath = opendir($startpath)) {
                                                 $filemonth = $datearray[0];
                                                 $fileday = $datearray[1];
                                                 $dcdescription = 'Issue of "' . $collection . '" Newspaper.';
-                                                $csvarray[] = array($collection . ", " . $datemap[$filemonth] ." ". $fileday .", ". $fileyear, $dcsubject, $dcsubject2, $dcsubject3, $dcdescription, $dccreator, $fileyear ."-". $filemonth ."-". $fileday, $dccontributor, $dcrights, $dcrelation, $dcformat, $dclanguage, $dctype, $file, $dccoverage, $dctext, $dcoriginalformat, $url . rawurlencode($folder) ."/". rawurlencode($year) ."/". rawurlencode($month) ."/". $file);
+                                                $csvarray[] = array($collection . ", " . $datemap[$filemonth] ." ". $fileday .", ". $fileyear, $dcsubject, $dcsubject2, $dcsubject3, $dcdescription, $dccreator, $dcsource, $dcpublisher, $fileyear ."-". $filemonth ."-". $fileday, $dccontributor, $dcrights, $dcrelation, $dcformat, $dclanguage, $dctype, $file, $dccoverage, $dctext, $dcoriginalformat, $url . rawurlencode($folder) ."/". rawurlencode($year) ."/". rawurlencode($month) ."/". $file);
                                             }
                                         }
                                         closedir($filepath);
